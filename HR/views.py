@@ -1,10 +1,22 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from mainlogin.models import Login
 
 # Create your views here.
 def home(request):
+    try:
+        print(request.session['id']  ) 
+
+    except:
+        return redirect('../')
+   
+
     return render(request,'hr_home.html')
 def approval(request):
+    try:
+        print(request.session['id']  ) 
+
+    except:
+        return redirect('../../')
     data=Login.objects.all()
     if request.method=='POST':
         if 'approve' in request.POST:

@@ -1,6 +1,17 @@
 from django.db import models
+from django.contrib.auth.models import AbstractUser,AbstractBaseUser
+from datetime import datetime
 
 # Create your models here.
+
+# class User(AbstractUser):
+#     email=models.EmailField(unique=True)
+#     verified_at = models.CharField(max_length=200,default='True')
+#     role =models.CharField(max_length=200,default='user')
+#     status = models.CharField(max_length=20, default='1')
+#     updated_at = models.CharField(max_length=200,default=datetime.utcnow())
+#     created_at = models.CharField(max_length=200,default=datetime.utcnow())
+#     remember_token=models.CharField(max_length=200,null=True)
 
 class Login(models.Model):
     id = models.AutoField(db_column='ID', primary_key=True)  # Field name made lowercase.

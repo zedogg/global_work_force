@@ -3,6 +3,7 @@ from .models import Login
 
 # Create your views here.
 def login(request):
+    request.session.delete()
     msg=' Login Credentials'
     if request.method=='POST':
         
@@ -15,7 +16,9 @@ def login(request):
             if auth:
                 
                 if auth[0].user_type=='1' and auth[0].approval=='1':
-
+                    request.session['id']=auth[0].id
+                    request.session['user_type']=auth[0].user_type
+                    request.session['name']=auth[0].f_name + auth[0].l_name
                     return redirect('/hr')
                 elif auth[0].approval !='1':
                     msg='user not approved'
@@ -47,3 +50,8 @@ def register(request):
             msg='Registered Succesfuly !!'
     print(msg)    
     return render(request,'registration.html',{'message':msg})
+
+def logout(request):
+    msg=''
+    request.session.delete()
+    return render(request,'login.html',{'message':msg})
